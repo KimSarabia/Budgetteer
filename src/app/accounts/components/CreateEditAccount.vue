@@ -1,0 +1,50 @@
+<template>
+  <div id="accounts-create-edit-view">
+    CREATE AND EDIT ACCOUNTS HERE
+
+    <router-link :to="{ name: 'accountsListView' }">View all accounts</router-link>
+
+    <form class="form" @submit.prevent="saveNewAccount">
+      <label for="name" class="label">Name</label>
+      <p class="control">
+        <input type="text" class="input" name="name" v-model="newAccount.name">
+      </p>
+      <label for="category" class="label">Category</label>
+      <p class="control">
+        <span class="select">
+          <select name="category" v-model="newAccount.name">
+            <option v-for="value, key in categories" :value="key">{{ value }}</option>
+          </select>
+        </span>
+      </p>
+      <label for="balance" class="label">Balance</label>
+      <p class="control">
+        <span class="select">
+          <select name="category" v-model="newAccount.category">
+            <option v-for="value, key in categories" :value="key">{{  value }}</option>
+          </select>
+        </span>
+      </p>
+    </form>
+
+  </div>
+</template>
+
+<script>
+  import { mapActions } from 'vuex'
+
+  export default {
+    name: 'accounts-create-edit-view',
+
+    methods: {
+      ...mapActions([
+        'addAccount'
+      ])
+    }
+  }
+</script>
+
+<style scoped lang='scss'>
+#accounts-create-edit-view {
+}
+</style>
