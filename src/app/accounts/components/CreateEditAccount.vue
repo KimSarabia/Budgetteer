@@ -32,16 +32,30 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import { CATEGORIES } from '../../../consts';
 
   export default {
     name: 'accounts-create-edit-view',
+    
+    data: () => {
+      return {
+        categories: CATEGORIES,
+        newAccount: {}
+      };
+    },
 
     methods: {
       ...mapActions([
         'addAccount'
-      ])
+      ]),
+    
+    saveNewAccount () {
+      this.addAccount(this.newAccount).then(() => {
+        this.newAccount = {};
+      });
     }
-  }
+    }
+  };
 </script>
 
 <style scoped lang='scss'>
