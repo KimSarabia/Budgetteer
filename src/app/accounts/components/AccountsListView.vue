@@ -1,9 +1,9 @@
 <template>
   <div id="accounts-list-view">
-    I'm a list of accounts!
-    
+    ACCOUNTS LIST VIEW
+
     <router-link :to="{ name: 'createEditAccount' }">Add an account</router-link>
-    
+
     <ul>
       <li v-for="account, key in accounts">
         {{ account.name }}
@@ -16,8 +16,19 @@
 
 <script>
 import { mapState } from 'vuex'
+import { CATEGORIES } from '../../../consts'
 export default {
-  name: 'accounts-list-view'
+  name: 'accounts-list-view',
+  data () {
+    return {
+      categories: CATEGORIES
+    }
+  },
+  computed: {
+    ...mapState({
+      'accounts': state => state.accounts.accounts
+    })
+  }
 }
 </script>
 

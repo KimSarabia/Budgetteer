@@ -1,6 +1,6 @@
 <template>
   <div id="accounts-create-edit-view">
-    CREATE AND EDIT ACCOUNTS HERE
+  CREATE AND EDIT ACCOUNT
 
     <router-link :to="{ name: 'accountsListView' }">View all accounts</router-link>
 
@@ -12,50 +12,54 @@
       <label for="category" class="label">Category</label>
       <p class="control">
         <span class="select">
-          <select name="category" v-model="newAccount.name">
+          <select name="category" v-model="newAccount.category">
             <option v-for="value, key in categories" :value="key">{{ value }}</option>
           </select>
         </span>
       </p>
       <label for="balance" class="label">Balance</label>
       <p class="control">
-        <span class="select">
-          <select name="category" v-model="newAccount.category">
-            <option v-for="value, key in categories" :value="key">{{  value }}</option>
-          </select>
-        </span>
+        <input type="text" class="input" name="balance" v-model="newAccount.balance">
       </p>
+      <div class="control is-grouped">
+        <p class="control">
+          <button class="button is-primary">Submit</button>
+        </p>
+        <p class="control">
+          <router-link :to="{ name: 'accountsListView' }"><button class="button is-link">Cancel</button></router-link>
+        </p>
+      </div>
     </form>
-
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import { CATEGORIES } from '../../../consts';
+import { mapActions } from 'vuex'
+import { CATEGORIES } from '../../../consts'
 
-  export default {
-    name: 'accounts-create-edit-view',
-    
-    data: () => {
-      return {
-        categories: CATEGORIES,
-        newAccount: {}
-      };
-    },
+export default {
+  name: 'accounts-create-edit-view',
 
-    methods: {
-      ...mapActions([
-        'addAccount'
-      ]),
-    
+  data: () => {
+    return {
+      categories: CATEGORIES,
+      newAccount: {}
+    }
+  },
+
+  methods: {
+    ...mapActions([
+      'addAccount'
+    ]),
+
     saveNewAccount () {
       this.addAccount(this.newAccount).then(() => {
-        this.newAccount = {};
-      });
+        this.newAccount = {}
+        this.$router.push({ name: 'accountsListView' })
+      })
     }
-    }
-  };
+  }
+}
 </script>
 
 <style scoped lang='scss'>

@@ -1,4 +1,4 @@
-# SaveYoMoney
+# Budgetteer
 
 > A Vue.js project
 
